@@ -19,6 +19,25 @@ public class Advent {
 				left.add(scan.nextInt());
 				right.add(scan.nextInt());	
 			}
+			//sorting algorithm
+			for(int i = 0; i<left.size()-1; i++) {
+				for(int j = 0; j<left.size()-1; j++) {
+					//sort left
+					if(left.get(j) > left.get(j+1)) {
+						swap(left, j, j+1);
+					}
+					//sort right
+					if(right.get(j) > right.get(j+1)) {
+						swap(right, j, j+1);
+					}
+				}
+			}
+			//part 1
+			for(int i = 0; i<left.size(); i++) {
+				temp+=Math.abs(left.get(i)-right.get(i));
+			}
+			
+			//part 2
 			for(int i = 0; i<left.size(); i++) {
 				int inital = left.get(i);
 				int count = 0;
@@ -33,8 +52,9 @@ public class Advent {
 				total += count*inital;
 				
 			}
-			System.out.println(total);
 			
+			System.out.println(temp);
+			System.out.println(total);
 			scan.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -42,5 +62,9 @@ public class Advent {
 		}
 		
 	}
-
+	public static void swap(ArrayList<Integer> list, int x, int y) {
+		int temp = list.get(x);
+		list.set(x, list.get(y));
+		list.set(y, temp);
+	}
 }

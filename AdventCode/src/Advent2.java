@@ -7,11 +7,11 @@ public class Advent2 {
 	public static int increasing(ArrayList<Integer> level) {
 		int inc = 0;
 		for(int i = 0; i<level.size()-1; i++) {
-			if(level.get(i)<level.get(i+1)) {
+			if(level.get(i)>level.get(i+1)) {
 				
 				break;
 			}
-			if(level.get(i) > level.get(i+1)) {
+			if(level.get(i) < level.get(i+1)) {
 				
 				inc++;
 			}
@@ -22,11 +22,11 @@ public class Advent2 {
 	public static int decreasing(ArrayList<Integer> level) {
 		int dec = 0;
 		for(int i = 0; i<level.size()-1; i++) {
-			if(level.get(i)>level.get(i+1)) {
+			if(level.get(i)<level.get(i+1)) {
 				
 				break;
 			}
-			if(level.get(i) < level.get(i+1)) {
+			if(level.get(i) > level.get(i+1)) {
 				
 				dec++;
 			}
@@ -50,35 +50,17 @@ public class Advent2 {
 				}
 				boolean less = true; 
 				
-				
+				System.out.println(increasing(level) + " " + decreasing(level));
 				if(increasing(level) != level.size()-1) {
+					level.remove(increasing(level)+1);
 					
-					for(int i = 0; i<level.size()-1; i++) {
-						if(level.get(i) == level.get(i+1)) {
-							level.remove(i+1);
-							break;
-						}
-						if(level.get(i+1) < level.get(i)) {
-							level.remove(i+1);
-							break;
-						}
-					}
 				}
-				if(decreasing(level) != level.size()-1) {
-					for(int i = 0; i<level.size()-1; i++) {
-						if(level.get(i) == level.get(i+1)) {
-							level.remove(i+1);
-							break;
-						}
-						if(level.get(i+1) > level.get(i)) {
-							level.remove(i+1);
-							break;
-						}
-					}
+				else if(decreasing(level) != level.size()-1) {
+					level.remove(decreasing(level)+1);
 				}
 				System.out.println(level);
 				if(increasing(level) == level.size()-1 || decreasing(level) == level.size()-1) {
-					System.out.println("yes");
+					
 					for(int i = 0; i < level.size()-1; i++) {
 						int diff  = Math.abs(level.get(i) - level.get(i+1));
 						if(diff < 1 || diff > 3) {
