@@ -12,9 +12,10 @@ public class Advent3 {
         
         // Process the input and calculate the sum of valid mul instructions
         int result = processInstructions(input);
-        
+        int partOne = partOne(input);
         // Output the result
         System.out.println("Result: " + result);
+        System.out.println(partOne);
     }
 
     // Method to read the file contents into a string
@@ -64,5 +65,15 @@ public class Advent3 {
         }
 
         return sum;
+    }
+    public static int partOne(String input) {
+    	Pattern mulPattern = Pattern.compile("mul\\((\\d+),\\s*(\\d+)\\)");
+    	Matcher matcher = mulPattern.matcher(input);
+    	int sum = 0;
+    	while(matcher.find()) {
+    		int mult = Integer.parseInt(matcher.group(1)) * Integer.parseInt(matcher.group(2));
+    		sum += mult;
+    	}
+    	return sum;
     }
 }
